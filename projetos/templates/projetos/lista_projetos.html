@@ -1,0 +1,32 @@
+<!-- Lista de projetos -->
+
+
+{% extends 'projetos/base.html' %}
+{% block title %}Projetos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>📋 Projetos</h2>
+    <a href="{% url 'novo_projeto' %}" class="btn btn-primary">
+        + Novo Projeto
+    </a>
+</div>
+
+<div class="row">
+    {% for projeto in projetos %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ projeto.nome }}</h5>
+                    <p class="card-text">{{ projeto.descricao }}</p>
+                    <a href="{% url 'lista_tarefas' projeto.id %}" class="btn btn-outline-dark btn-sm">
+                        Ver tarefas
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>Nenhum projeto cadastrado.</p>
+    {% endfor %}
+</div>
+{% endblock %}

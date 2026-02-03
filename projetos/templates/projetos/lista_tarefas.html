@@ -1,0 +1,34 @@
+{% extends 'projetos/base.html' %}
+{% block title %}Tarefas{% endblock %}
+
+{% block content %}
+<h2>📝 {{ projeto.nome }}</h2>
+
+<a href="{% url 'nova_tarefa' projeto.id %}" class="btn btn-primary mb-3">
+    + Nova Tarefa
+</a>
+
+<ul class="list-group">
+    {% for tarefa in tarefas %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {% if tarefa.concluida %}
+                <span class="text-decoration-line-through text-muted">
+                    {{ tarefa.titulo }}
+                </span>
+            {% else %}
+                {{ tarefa.titulo }}
+            {% endif %}
+
+            <a href="{% url 'editar_tarefa' tarefa.id %}" class="btn btn-sm btn-outline-success">
+                {% if tarefa.concluida %}Desmarcar{% else %}Concluir{% endif %}
+            </a>
+        </li>
+    {% empty %}
+        <li class="list-group-item">Nenhuma tarefa cadastrada.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'lista_projetos' %}" class="btn btn-link mt-3">
+    ← Voltar para projetos
+</a>
+{% endblock %}
