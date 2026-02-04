@@ -1,17 +1,17 @@
-#Mini sistema de gerenciamento de projetos e tarefas
+# Mini sistema de gerenciamento de projetos e tarefas
 
 Mini sistema desenvolvido em **Django** para gerenciamento de projetos e tarefas vinculadas a cada projeto.
 
 ---
 
-##Funcionalidades
+## Funcionalidades
 - Cadastro de projetos  
 - Cadastro de tarefas vinculadas a um projeto  
 - Atualização do status da tarefa (concluída ou não)
 
 ---
 
-##Tecnologias utilizadas
+## Tecnologias utilizadas
 - Python  
 - Django  
 - Django Forms  
@@ -20,40 +20,40 @@ Mini sistema desenvolvido em **Django** para gerenciamento de projetos e tarefas
 
 ---
 
-##Como executar o projeto
+## Como executar o projeto no windows
 
-###1 Clone o repositório
+### 1 Clone o repositório
 
 ```bash
-git clone https://github.com/sabrenda7/tarefas-django.git
-cd tarefas-django
+git clone https://github.com/sabrenda7/tarefas_django.git
+cd tarefas_django
 ```
 
-###2 Crie e ative o ambiente virtual
+### 2 Crie e ative o ambiente virtual
 
 ```bash
 python -m venv .venv
 ```
 
-# Windows
-
+### 3 Ative o ambiente virtual
 ```bash
 .venv\Scripts\activate
 ```
 
-###3 Instale as dependencias 
+### 4 Instale 
 
 ```bash
-pip install -r requirements.txt
+pip install django
 ```
 
-###4 Inicie o servidor
+### 5 Inicie o servidor
 
 ```bash
 python manage.py migrate
+python manage.py runserver
 ```
 
-###5 Acesse no navegador
+###6 Acesse no navegador
 http://127.0.0.1:8000/projetos/
 
 
