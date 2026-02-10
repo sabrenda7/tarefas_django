@@ -8,8 +8,19 @@ class Projeto(models.Model):
         return self.nome
 
 class Tarefa(models.Model):
+    STATUS_CHOICES = [
+        ('P', 'Pendente'),
+        ('E', 'Em andamento'),
+        ('C', 'Concluída'),
+    ]
+
     titulo = models.CharField(max_length=100)
-    concluida = models.BooleanField(default=False)
+    descricao = models.TextField(blank=True)
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS_CHOICES,
+        default='P'
+    )
     projeto = models.ForeignKey(
         Projeto,
         on_delete=models.CASCADE,
@@ -18,3 +29,4 @@ class Tarefa(models.Model):
 
     def __str__(self):
         return self.titulo
+

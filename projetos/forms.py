@@ -10,4 +10,4 @@ class ProjetoForm(forms.ModelForm):
 class TarefaForm(forms.ModelForm):
     class Meta:
         model = Tarefa
-        fields = ['titulo']
+        fields = ['titulo', 'descricao', 'status']
