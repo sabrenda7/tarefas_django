@@ -14,14 +14,16 @@
         <div>
             <strong>{{ tarefa.titulo }}</strong><br>
 
+            {# --- Badge visual do status --- #}
             {% if tarefa.status == 'C' %}
-                <span class="badge bg-success">✅ Concluída</span>
+                <span class="badge bg-success">✅ {{ tarefa.get_status_display }}</span>
             {% elif tarefa.status == 'E' %}
-                <span class="badge bg-warning text-dark">⏳ Em andamento</span>
+                <span class="badge bg-warning text-dark">⏳ {{ tarefa.get_status_display }}</span>
             {% else %}
-                <span class="badge bg-secondary">📌 Pendente</span>
+                <span class="badge bg-secondary">📌 {{ tarefa.get_status_display }}</span>
             {% endif %}
 
+            {# --- Data de entrega --- #}
             {% if tarefa.data_entrega %}
                 <br>
                 <small class="text-muted">
@@ -30,18 +32,25 @@
             {% endif %}
         </div>
 
-        <a href="{% url 'editar_tarefa' tarefa.id %}" class="btn btn-sm btn-outline-primary">
-            Editar
+        {# --- Botão inteligente --- #}
+        <a href="{% url 'editar_tarefa' tarefa.id %}"
+           class="btn btn-sm
+           {% if tarefa.status == 'P' %}btn-outline-secondary
+           {% elif tarefa.status == 'E' %}btn-outline-warning
+           {% else %}btn-outline-success{% endif %}">
+            {% if tarefa.status == 'C' %}✅{% elif tarefa.status == 'E' %}⏳{% else %}📌{% endif %}
+            Avançar status
         </a>
     </li>
-{% empty %}
-    <li class="list-group-item">Nenhuma tarefa cadastrada.</li>
-{% endfor %}
 
+    {% empty %}
+    <li class="list-group-item text-muted">
+        Nenhuma tarefa cadastrada.
+    </li>
+    {% endfor %}
 </ul>
 
 <a href="{% url 'lista_projetos' %}" class="btn btn-link mt-3">
     ← Voltar para projetos
 </a>
 {% endblock %}
-
