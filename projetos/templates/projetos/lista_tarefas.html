@@ -18,6 +18,7 @@
             {% else %}
                 {{ tarefa.titulo }}
             {% endif %}
+            <br><small>Entrega: {{ tarefa.data_entrega|date:"d/m/Y" }}</small></li>
 
             <a href="{% url 'editar_tarefa' tarefa.id %}" class="btn btn-sm btn-outline-success">
                 {% if tarefa.concluida %}Desmarcar{% else %}Concluir{% endif %}

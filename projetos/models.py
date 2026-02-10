@@ -10,6 +10,7 @@ class Projeto(models.Model):
 class Tarefa(models.Model):
     titulo = models.CharField(max_length=100)
     concluida = models.BooleanField(default=False)
+    data_entrega = models.DateField(null=True, blank=True)
     projeto = models.ForeignKey(
         Projeto,
         on_delete=models.CASCADE,
