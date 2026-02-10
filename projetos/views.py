@@ -51,7 +51,13 @@ def nova_tarefa(request, id):
 def editar_tarefa(request, id):
     tarefa = get_object_or_404(Tarefa, id=id)
 
-    tarefa.concluida = not tarefa.concluida
+    if tarefa.status == 'P':
+        tarefa.status = 'E'
+    elif tarefa.status == 'E':
+        tarefa.status = 'C'
+    else:
+        tarefa.status = 'P'
+
     tarefa.save()
 
-    return redirect('lista_tarefas', id=tarefa.projeto.id)
+    return redirect('lista_tarefas', tarefa.projeto.id)
