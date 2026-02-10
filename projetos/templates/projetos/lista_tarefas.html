@@ -11,32 +11,38 @@
 <ul class="list-group">
     {% for tarefa in tarefas %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <strong>{{ tarefa.titulo }}</strong><br>
 
-        <span>
-            {{ tarefa.titulo }}
+            {# --- Badge visual do status --- #}
+            {% if tarefa.status == 'C' %}
+                <span class="badge bg-success">✅ {{ tarefa.get_status_display }}</span>
+            {% elif tarefa.status == 'E' %}
+                <span class="badge bg-warning text-dark">⏳ {{ tarefa.get_status_display }}</span>
+            {% else %}
+                <span class="badge bg-secondary">📌 {{ tarefa.get_status_display }}</span>
+            {% endif %}
 
-            {# --- Funcionalidade adicionada pelo Integrante 1: Status da tarefa --- #}
-            —
-            <strong>{{ tarefa.get_status_display }}</strong>
-
-            {# --- Funcionalidade adicionada pelo Integrante 2: Data de entrega --- #}
+            {# --- Data de entrega --- #}
             {% if tarefa.data_entrega %}
-                <small class="text-muted ms-2">
-                    (Entrega: {{ tarefa.data_entrega|date:"d/m/Y" }})
+                <br>
+                <small class="text-muted">
+                    📅 Entrega: {{ tarefa.data_entrega|date:"d/m/Y" }}
                 </small>
             {% endif %}
-        </span>
+        </div>
 
-        {# --- Ajuste visual e padronização (Integrante 3 – Bootstrap/UI) --- #}
+        {# --- Botão inteligente --- #}
         <a href="{% url 'editar_tarefa' tarefa.id %}"
            class="btn btn-sm
            {% if tarefa.status == 'P' %}btn-outline-secondary
            {% elif tarefa.status == 'E' %}btn-outline-warning
            {% else %}btn-outline-success{% endif %}">
+            {% if tarefa.status == 'C' %}✅{% elif tarefa.status == 'E' %}⏳{% else %}📌{% endif %}
             Avançar status
         </a>
-
     </li>
+
     {% empty %}
     <li class="list-group-item text-muted">
         Nenhuma tarefa cadastrada.

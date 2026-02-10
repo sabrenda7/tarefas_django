@@ -10,4 +10,7 @@ class ProjetoForm(forms.ModelForm):
 class TarefaForm(forms.ModelForm):
     class Meta:
         model = Tarefa
-        fields = ['titulo', 'descricao', 'status']
+        fields = ['titulo', 'descricao', 'status', 'data_entrega']
+        widgets = {'data_entrega': forms.DateInput(attrs={'type': 'date'}),
+        }
+

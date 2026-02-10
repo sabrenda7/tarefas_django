@@ -21,6 +21,8 @@ class Tarefa(models.Model):
         choices=STATUS_CHOICES,
         default='P'
     )
+
+    data_entrega = models.DateField(null=True, blank=True)
     projeto = models.ForeignKey(
         Projeto,
         on_delete=models.CASCADE,
